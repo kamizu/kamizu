@@ -8,7 +8,7 @@
 <div id="hd">
 	<div class="wrap">
 		<div class="head cl">
-			<h2><a href="{forumpath}index.aspx" title="Discuz!NT|BBS|论坛"><img src="{imagedir}/logo.png" alt="Discuz!NT|BBS|论坛"/></a></h2>
+			<h2><a href="{forumpath}index.aspx" title="{config.forumtitle}"><img src="{imagedir}/logo.png" alt="{config.forumtitle}"/></a></h2>
 			<%if {userid}==-1%>
             <%if {pagename}!="login.aspx"&&{pagename}!="register.aspx"%>
 			<form onsubmit="if ($('ls_username').value == '' || $('ls_username').value == '用户名/Email') showWindow('login', '{rooturl}login.aspx');hideWindow('register');return" action="{rooturl}login.aspx?referer={pagename}" id="lsform" autocomplete="off" method="post">
@@ -84,7 +84,7 @@
                 <%/if%>
                 <%if {config.secques}==1%>
 			    <div id="floatlayout_login" class="pbm">
-					<select style="width:156px;margin-bottom:8px;" id="question" name="question" selecti="5" name="question" onchange="displayAnswer();" tabindex="904">
+					<select style="width:156px;margin-bottom:8px;" id="question" name="question" name="question" onchange="displayAnswer();" tabindex="904">
 						<option id="question" value="0" selected="selected">安全提问(未设置请忽略)</option>
 						<option id="question" value="1">母亲的名字</option>
 						<option id="question" value="2">爷爷的名字</option>
@@ -102,8 +102,10 @@
                         $('ls_more').style.display = 'none';
                     }
                     function displayAnswer() {
-                        $('answer').style.display = '';
-						$('answer').focus();
+                        if ($("question").value > 0)
+                            $("answer").style.display = "";
+                        else
+                            $("answer").style.display = "none";
                     }
                 </script>
 				<div class="ptm cl" style="border-top:1px dashed #CDCDCD;">
